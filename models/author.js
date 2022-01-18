@@ -39,6 +39,20 @@ AuthorSchema.virtual("url").get(function () {
     return "/catalog/author/" + this._id;
 });
 
+AuthorSchema.virtual("date_of_birth_update").get(function () {
+    if (this.date_of_birth) {
+         return this.date_of_birth.toISOString().split("T")[0];
+    }
+    return '';
+});
+
+AuthorSchema.virtual("date_of_death_update").get(function () {
+    if (this.date_of_death) {
+        return this.date_of_death.toISOString().split("T")[0];
+    }
+    return '';
+});
+
 AuthorSchema.virtual("date_of_birth_formatted").get(function () {
     return this.date_of_birth
         ? DateTime.fromJSDate(this.date_of_birth).toLocaleString(
